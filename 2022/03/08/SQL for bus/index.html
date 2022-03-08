@@ -5,17 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>公交数据 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="建表地理位置表create table t_geo  select id, gps_code, gps_direction from t_bus_status;  路线表create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;  展示在Grafana线">
+  <meta name="description" content="原始数据数据库：bus数据表：t_bus_status 建表地理位置表create table t_geo  select id, gps_code, gps_direction from t_bus_status;  路线表create table t_road select distinct road_id, road_name, site_id, site_no, site_name fro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="公交数据">
 <meta property="og:url" content="http://missingstuffedbun.github.io/2022/03/08/SQL%20for%20bus/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="建表地理位置表create table t_geo  select id, gps_code, gps_direction from t_bus_status;  路线表create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;  展示在Grafana线">
+<meta property="og:description" content="原始数据数据库：bus数据表：t_bus_status 建表地理位置表create table t_geo  select id, gps_code, gps_direction from t_bus_status;  路线表create table t_road select distinct road_id, road_name, site_id, site_no, site_name fro">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-07T22:47:48.000Z">
-<meta property="article:modified_time" content="2022-03-08T15:19:11.923Z">
+<meta property="article:modified_time" content="2022-03-08T15:43:10.043Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -76,13 +76,24 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      公交数据
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h1><h3 id="地理位置表"><a href="#地理位置表" class="headerlink" title="地理位置表"></a>地理位置表</h3><pre><code>create table t_geo  select id, gps_code, gps_direction from t_bus_status;
+        <h2 id="原始数据"><a href="#原始数据" class="headerlink" title="原始数据"></a>原始数据</h2><p>数据库：bus<br>数据表：t_bus_status</p>
+<h2 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h2><h3 id="地理位置表"><a href="#地理位置表" class="headerlink" title="地理位置表"></a>地理位置表</h3><pre><code>create table t_geo  select id, gps_code, gps_direction from t_bus_status;
 </code></pre>
 <h4 id="路线表"><a href="#路线表" class="headerlink" title="路线表"></a>路线表</h4><pre><code>create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;
 </code></pre>
-<h1 id="展示在Grafana"><a href="#展示在Grafana" class="headerlink" title="展示在Grafana"></a>展示在Grafana</h1><h3 id="线路的车次"><a href="#线路的车次" class="headerlink" title="线路的车次"></a>线路的车次</h3><pre><code>SELECT
+<h2 id="展示在Grafana"><a href="#展示在Grafana" class="headerlink" title="展示在Grafana"></a>展示在Grafana</h2><h3 id="线路的车次"><a href="#线路的车次" class="headerlink" title="线路的车次"></a>线路的车次</h3><pre><code>SELECT
   $__timeGroupAlias(gps_date,$__interval),
   road_id AS metric,
   count(site_id) AS &quot;site_id&quot;
@@ -96,7 +107,7 @@ ORDER BY $__timeGroup(gps_date,$__interval)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/08/SQL%20for%20bus/" data-id="cl0iapwf500017cuu93oa01tm" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/08/SQL%20for%20bus/" data-id="cl0ibfdcn00029guu5d4q0dbo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -109,7 +120,7 @@ ORDER BY $__timeGroup(gps_date,$__interval)
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          在阿里云服务器安装Grafana，并配置MySQL连接
         
       </div>
     </a>
@@ -149,15 +160,19 @@ ORDER BY $__timeGroup(gps_date,$__interval)
       <ul>
         
           <li>
+            <a href="/2022/03/08/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/08/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2022/03/08/Grafana%20on%20Alibaba%20Cloud/">(no title)</a>
+            <a href="/2022/03/08/Grafana%20on%20Alibaba%20Cloud/">在阿里云服务器安装Grafana，并配置MySQL连接</a>
           </li>
         
           <li>
-            <a href="/2022/03/08/SQL%20for%20bus/">(no title)</a>
+            <a href="/2022/03/08/SQL%20for%20bus/">公交数据</a>
           </li>
         
       </ul>
