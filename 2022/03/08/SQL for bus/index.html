@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="建表地理位置表create table t_geo  select id, gps_code, gps_direction from t_bus_status;  路线表create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;  展示在Grafana线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://missingstuffedbun.github.io/2022/03/08/SQL%20for%20bus/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="建表地理位置表create table t_geo  select id, gps_code, gps_direction from t_bus_status;  路线表create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;  展示在Grafana线">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-07T22:47:48.000Z">
+<meta property="article:modified_time" content="2022-03-08T15:19:11.923Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://missingstuffedbun.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SQL for bus" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/08/SQL%20for%20bus/" class="article-date">
+  <time datetime="2022-03-07T22:47:48.000Z" itemprop="datePublished">2022-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="建表"><a href="#建表" class="headerlink" title="建表"></a>建表</h1><h3 id="地理位置表"><a href="#地理位置表" class="headerlink" title="地理位置表"></a>地理位置表</h3><pre><code>create table t_geo  select id, gps_code, gps_direction from t_bus_status;
+</code></pre>
+<h4 id="路线表"><a href="#路线表" class="headerlink" title="路线表"></a>路线表</h4><pre><code>create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;
+</code></pre>
+<h1 id="展示在Grafana"><a href="#展示在Grafana" class="headerlink" title="展示在Grafana"></a>展示在Grafana</h1><h3 id="线路的车次"><a href="#线路的车次" class="headerlink" title="线路的车次"></a>线路的车次</h3><pre><code>SELECT
+  $__timeGroupAlias(gps_date,$__interval),
+  road_id AS metric,
+  count(site_id) AS &quot;site_id&quot;
+FROM t_bus_status
+WHERE
+  $__timeFilter(gps_date)
+GROUP BY 1,2
+ORDER BY $__timeGroup(gps_date,$__interval)
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://missingstuffedbun.github.io/2022/03/08/SQL%20for%20bus/" data-id="cl0ia6on10001f4uu6muxfxdl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/08/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/08/Grafana%20on%20Alibaba%20Cloud/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/08/SQL%20for%20bus/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

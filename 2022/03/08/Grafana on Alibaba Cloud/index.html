@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在阿里云服务器安装Grafana，并配置MySQL连接安装MySQLTODO 启动Grafanadocker stop grafana &amp; docker rm grafana docker run -d --name grafana -p 3000:3000 grafana&#x2F;grafana  基本信息公网IP： 47.107.123.109虚拟网卡（可以通过ifconfig查询）Grafa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在阿里云服务器安装Grafana，并配置MySQL连接安装MySQLTODO 启动Grafanadocker stop grafana &amp; docker rm grafana docker run -d --name grafana -p 3000:3000 grafana&#x2F;grafana  基本信息公网IP： 47.107.123.109虚拟网卡（可以通过ifconfig查询）Grafa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-07T22:47:48.000Z">
+<meta property="article:modified_time" content="2022-03-08T15:19:11.876Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://missingstuffedbun.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Grafana on Alibaba Cloud" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" class="article-date">
+  <time datetime="2022-03-07T22:47:48.000Z" itemprop="datePublished">2022-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="在阿里云服务器安装Grafana，并配置MySQL连接"><a href="#在阿里云服务器安装Grafana，并配置MySQL连接" class="headerlink" title="在阿里云服务器安装Grafana，并配置MySQL连接"></a>在阿里云服务器安装Grafana，并配置MySQL连接</h1><h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p><strong>TODO</strong></p>
+<h2 id="启动Grafana"><a href="#启动Grafana" class="headerlink" title="启动Grafana"></a>启动Grafana</h2><pre><code>docker stop grafana &amp; docker rm grafana
+docker run -d --name grafana -p 3000:3000 grafana/grafana
+</code></pre>
+<h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>公网IP： 47.107.123.109<br>虚拟网卡（可以通过ifconfig查询）<br>Grafana IP： 172.17.0.2<br>MySQL IP： 172.17.0.1</p>
+<h2 id="修改MySQL配置"><a href="#修改MySQL配置" class="headerlink" title="修改MySQL配置"></a>修改MySQL配置</h2><pre><code>vi /etc/mysql/mysql.conf.d/mysqld.cnf
+</code></pre>
+<p>bind-address = 0.0.0.0</p>
+<h2 id="新用户并授权（注意区分符号’和-）"><a href="#新用户并授权（注意区分符号’和-）" class="headerlink" title="新用户并授权（注意区分符号’和`）"></a>新用户并授权（注意区分符号’和`）</h2><pre><code>CREATE USER &#39;remote&#39;@&#39;172.17.0.2&#39; IDENTIFIED BY &#39;password&#39;;
+GRANT ALL PRIVILEGES ON `bus`.* TO `remote`@`172.17.0.2` WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+</code></pre>
+<h2 id="查询用户及授权"><a href="#查询用户及授权" class="headerlink" title="查询用户及授权"></a>查询用户及授权</h2><pre><code>update user set host=&#39;localhost&#39; where user=&#39;root&#39;;
+select user,host from user;
+show grants for remote@&#39;172.17.0.2&#39;;
+</code></pre>
+<h2 id="重启MySQL"><a href="#重启MySQL" class="headerlink" title="重启MySQL"></a>重启MySQL</h2><pre><code>systemctl restart mysql
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" data-id="cl0ia6omd0000f4uu7xf9clas" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/08/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/08/SQL%20for%20bus/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/08/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/08/Grafana%20on%20Alibaba%20Cloud/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/08/SQL%20for%20bus/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
