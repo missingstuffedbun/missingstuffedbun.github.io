@@ -7,15 +7,15 @@
   
   <title>在阿里云服务器安装Grafana，并配置MySQL连接 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安装MySQLTODO 启动Grafanadocker stop grafana &amp; docker rm grafana docker run -d --name grafana -p 3000:3000 grafana&#x2F;grafana  基本信息公网IP： 47.107.123.109虚拟网卡（可以通过ifconfig查询）Grafana IP： 172.17.0.2MySQL IP：">
+  <meta name="description" content="安装MySQLTODO 启动Grafana12docker stop grafana &amp; docker rm grafanadocker run -d --name grafana -p 3000:3000 grafana&#x2F;grafana  基本信息公网IP： 47.107.123.109虚拟网卡（可以通过ifconfig查询）Grafana IP： 172.17.0.2MySQL IP：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在阿里云服务器安装Grafana，并配置MySQL连接">
 <meta property="og:url" content="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="安装MySQLTODO 启动Grafanadocker stop grafana &amp; docker rm grafana docker run -d --name grafana -p 3000:3000 grafana&#x2F;grafana  基本信息公网IP： 47.107.123.109虚拟网卡（可以通过ifconfig查询）Grafana IP： 172.17.0.2MySQL IP：">
+<meta property="og:description" content="安装MySQLTODO 启动Grafana12docker stop grafana &amp; docker rm grafanadocker run -d --name grafana -p 3000:3000 grafana&#x2F;grafana  基本信息公网IP： 47.107.123.109虚拟网卡（可以通过ifconfig查询）Grafana IP： 172.17.0.2MySQL IP：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-07T22:47:48.000Z">
-<meta property="article:modified_time" content="2022-03-08T15:41:42.966Z">
+<meta property="article:modified_time" content="2022-03-09T08:16:19.630Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -89,28 +89,23 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><p><strong>TODO</strong></p>
-<h2 id="启动Grafana"><a href="#启动Grafana" class="headerlink" title="启动Grafana"></a>启动Grafana</h2><pre><code>docker stop grafana &amp; docker rm grafana
-docker run -d --name grafana -p 3000:3000 grafana/grafana
-</code></pre>
+<h2 id="启动Grafana"><a href="#启动Grafana" class="headerlink" title="启动Grafana"></a>启动Grafana</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop grafana &amp; docker rm grafana</span><br><span class="line">docker run -d --name grafana -p 3000:3000 grafana/grafana</span><br></pre></td></tr></table></figure>
+
 <h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>公网IP： 47.107.123.109<br>虚拟网卡（可以通过ifconfig查询）<br>Grafana IP： 172.17.0.2<br>MySQL IP： 172.17.0.1</p>
-<h2 id="修改MySQL配置"><a href="#修改MySQL配置" class="headerlink" title="修改MySQL配置"></a>修改MySQL配置</h2><pre><code>vi /etc/mysql/mysql.conf.d/mysqld.cnf
-</code></pre>
-<p>bind-address = 0.0.0.0</p>
-<h2 id="新用户并授权（注意区分符号’和-）"><a href="#新用户并授权（注意区分符号’和-）" class="headerlink" title="新用户并授权（注意区分符号’和`）"></a>新用户并授权（注意区分符号’和`）</h2><pre><code>CREATE USER &#39;remote&#39;@&#39;172.17.0.2&#39; IDENTIFIED BY &#39;password&#39;;
-GRANT ALL PRIVILEGES ON `bus`.* TO `remote`@`172.17.0.2` WITH GRANT OPTION;
-FLUSH PRIVILEGES;
-</code></pre>
-<h2 id="查询用户及授权"><a href="#查询用户及授权" class="headerlink" title="查询用户及授权"></a>查询用户及授权</h2><pre><code>update user set host=&#39;localhost&#39; where user=&#39;root&#39;;
-select user,host from user;
-show grants for remote@&#39;172.17.0.2&#39;;
-</code></pre>
-<h2 id="重启MySQL"><a href="#重启MySQL" class="headerlink" title="重启MySQL"></a>重启MySQL</h2><pre><code>systemctl restart mysql
-</code></pre>
+<h2 id="修改MySQL配置"><a href="#修改MySQL配置" class="headerlink" title="修改MySQL配置"></a>修改MySQL配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bind-address = 0.0.0.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="新用户并授权（注意区分符号’和-）"><a href="#新用户并授权（注意区分符号’和-）" class="headerlink" title="新用户并授权（注意区分符号’和`）"></a>新用户并授权（注意区分符号’和`）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;remote&#x27;@&#x27;172.17.0.2&#x27; IDENTIFIED BY &#x27;password&#x27;;</span><br><span class="line">GRANT ALL PRIVILEGES ON `bus`.* TO `remote`@`172.17.0.2` WITH GRANT OPTION;</span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查询用户及授权"><a href="#查询用户及授权" class="headerlink" title="查询用户及授权"></a>查询用户及授权</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update user set host=&#x27;localhost&#x27; where user=&#x27;root&#x27;;</span><br><span class="line">select user,host from user;</span><br><span class="line">show grants for remote@&#x27;172.17.0.2&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启MySQL"><a href="#重启MySQL" class="headerlink" title="重启MySQL"></a>重启MySQL</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysql</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" data-id="cl0ie2l6f0002jwuu99xj4jj4" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" data-id="cl0jahal200026wuuf7r25b5l" class="article-share-link">Share</a>
       
       
     </footer>
