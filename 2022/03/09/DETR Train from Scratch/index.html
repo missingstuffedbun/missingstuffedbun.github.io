@@ -15,7 +15,7 @@
 <meta property="og:description" content="Example can be found in Github.  Convert Custom Dataset to Coco FormatReorganize Dirs and FilesFile hierarchy 12345678910--Dataset----train------image.jpg----test------image.jpg----val------image.jpg">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-09T08:27:00.834Z">
-<meta property="article:modified_time" content="2022-03-09T14:50:56.241Z">
+<meta property="article:modified_time" content="2022-03-09T15:16:44.402Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="DETR">
 <meta property="article:tag" content="Deep Learning">
@@ -127,15 +127,22 @@
 <h2 id="On-Premise-Deployment"><a href="#On-Premise-Deployment" class="headerlink" title="On-Premise Deployment"></a>On-Premise Deployment</h2><p>Once tested in colab, deploy the code to on-premise workstation.  </p>
 <h3 id="Code-Preparation"><a href="#Code-Preparation" class="headerlink" title="Code Preparation"></a>Code Preparation</h3><p>Pull it down on the deployment host.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:missingstuffedbun/detr.git</span><br></pre></td></tr></table></figure>
-<h3 id="Docker-Env"><a href="#Docker-Env" class="headerlink" title="Docker Env"></a>Docker Env</h3><p>Build docker for DETR.</p>
-<p>Build docker for DETR with jupyter. </p>
+<h3 id="Docker-Env"><a href="#Docker-Env" class="headerlink" title="Docker Env"></a>Docker Env</h3><p>Build docker for DETR with jupyter. </p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install jupyterlab</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> jupyter lab --generate-config</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> python -c <span class="string">&quot;from notebook.auth import passwd; print(\&quot;c.NotebookApp.password = u&#x27;\&quot; +  passwd(&#x27;3582521&#x27;) + \&quot;&#x27;\&quot;)&quot;</span> &gt;&gt; ~/.jupyter/jupyter_lab_config.py</span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">9005</span></span><br><span class="line"><span class="keyword">ENV</span> NOTEBOOK_DIR=/workspace</span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> jupyter lab --ip=<span class="string">&#x27;0.0.0.0&#x27;</span> --allow-root --no-browser --port=<span class="variable">$&#123;PORT&#125;</span> --allow-root --notebook-dir=<span class="variable">$&#123;NOTEBOOK_DIR&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>Please note that pip mirror site should be set properly.  </p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="language-bash"> </span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build . -t missingstuffedbun/detr:0.1</span><br></pre></td></tr></table></figure>
 <p>Run docker. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run missingstuffedbun/detr:0.1</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=RkhXoj_Vvr4&t=1330s">Youtube</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/09/DETR%20Train%20from%20Scratch/" data-id="cl0jp7sse0001rsuu046f5zbh" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/09/DETR%20Train%20from%20Scratch/" data-id="cl0jpglwx0000oouu5d19camk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DETR/" rel="tag">DETR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a></li></ul>
