@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jupyter | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="安装1pip install jupyterlab 设置jupyter密码 1jupyter lab password 使用1nohup jupyter lab --allow-root --ip 0.0.0.0 --port 8888  重启12ps -aux | grep jupyterkill -9 &lt;pid&gt;    修改密码ALTER USER ‘root‘@’localhos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jupyter">
+<meta property="og:url" content="http://missingstuffedbun.github.io/2022/03/09/Jupyter%20on%20Alibaba%20Cloud/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="安装1pip install jupyterlab 设置jupyter密码 1jupyter lab password 使用1nohup jupyter lab --allow-root --ip 0.0.0.0 --port 8888  重启12ps -aux | grep jupyterkill -9 &lt;pid&gt;    修改密码ALTER USER ‘root‘@’localhos">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-09T14:25:47.423Z">
+<meta property="article:modified_time" content="2022-03-09T14:30:13.601Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://missingstuffedbun.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Jupyter on Alibaba Cloud" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/09/Jupyter%20on%20Alibaba%20Cloud/" class="article-date">
+  <time datetime="2022-03-09T14:25:47.423Z" itemprop="datePublished">2022-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jupyter
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyterlab</span><br></pre></td></tr></table></figure>
+<p>设置jupyter密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter lab password</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup jupyter lab --allow-root --ip 0.0.0.0 --port 8888 </span><br></pre></td></tr></table></figure>
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep jupyter</span><br><span class="line">kill -9 &lt;pid&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h2><p>ALTER USER ‘root‘@’localhost’ IDENTIFIED BY ‘123456’;</p>
+<p>systemctl status mysql</p>
+<p>mysql cmd建库建表导csv：<br>create database if not exists bus;<br>use bus;<br>DROP TABLE IF EXISTS <code>t_bus_status</code>;<br>CREATE TABLE <code>t_bus_status</code> (<br>  <code>id</code> int(11) NOT NULL AUTO_INCREMENT,<br>  <code>bus_id</code> varchar(255) DEFAULT NULL,<br>  <code>bus_plate</code> varchar(255) DEFAULT NULL,<br>  <code>bus_state</code> int(11) DEFAULT NULL,<br>  <code>comp_code</code> varchar(255) DEFAULT NULL,<br>  <code>current_runs</code> int(11) DEFAULT NULL,<br>  <code>gps_code</code> varchar(255) DEFAULT NULL,<br>  <code>gps_date</code> varchar(255) DEFAULT NULL,<br>  <code>store_date</code> varchar(255) DEFAULT NULL,<br>  <code>gps_direction</code> int(11) DEFAULT NULL,<br>  <code>gps_mileage</code> varchar(255) DEFAULT NULL,<br>  <code>gps_speed</code> varchar(255) DEFAULT NULL,<br>  <code>plan_runs</code> int(11) DEFAULT NULL,<br>  <code>plan_time</code> varchar(255) DEFAULT NULL,<br>  <code>road_id</code> varchar(255) DEFAULT NULL,<br>  <code>road_name</code> varchar(255) DEFAULT NULL,<br>  <code>road_type</code> int(11) DEFAULT NULL,<br>  <code>site_id</code> varchar(255) DEFAULT NULL,<br>  <code>site_name</code> varchar(255) DEFAULT NULL,<br>  <code>site_no</code> int(11) DEFAULT NULL,<br>  <code>site_state</code> int(11) DEFAULT NULL,<br>  <code>create_time</code> varchar(255) DEFAULT NULL,<br>  PRIMARY KEY (<code>id</code>)<br>) ENGINE=InnoDB AUTO_INCREMENT=24771706 DEFAULT CHARSET=utf8;</p>
+<p>ALTER TABLE tb_description DEFAULT CHARACTER SET utf8mb4;<br>set sql_mode=’’;</p>
+<p>load data infile ‘/var/lib/mysql-files/t_bus_status.csv’ into table t_bus_status fields terminated by ‘,’ optionally enclosed by ‘“‘ ignore 1 rows;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://missingstuffedbun.github.io/2022/03/09/Jupyter%20on%20Alibaba%20Cloud/" data-id="cl0jo9dgs000030uu9pfa0tzo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/09/MySQL-on-Alibaba-Cloud/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL on Alibaba Cloud
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/03/09/Github%20Page%20via%20Hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">通过Github Page和Hexo搭建个人博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91-Jupyter-MySQL/" rel="tag">阿里云, Jupyter, MySQL</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91-Jupyter-MySQL/" style="font-size: 10px;">阿里云, Jupyter, MySQL</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/09/Jupyter-and-MySQL-on-Alibaba-Cloud/">Jupyter and MySQL on Alibaba Cloud</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/09/MySQL-on-Alibaba-Cloud/">MySQL on Alibaba Cloud</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/09/Jupyter%20on%20Alibaba%20Cloud/">Jupyter</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/09/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/09/SQL%20for%20bus/">公交数据</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
