@@ -64,6 +64,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SQL for bus" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/20/SQL%20for%20bus/" class="article-date">
+  <time datetime="2022-03-19T17:00:54.299Z" itemprop="datePublished">2022-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E5%AD%A6/">教学</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/20/SQL%20for%20bus/">公交数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>数据库：bus<br>数据表：t_bus_status</p>
+<h2 id="建库建表"><a href="#建库建表" class="headerlink" title="建库建表"></a>建库建表</h2><p>导入csv数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">create database if not exists bus;</span><br><span class="line">use bus;</span><br><span class="line">DROP TABLE IF EXISTS `t_bus_status`;</span><br><span class="line">CREATE TABLE `t_bus_status` (</span><br><span class="line">  `id` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `bus_id` varchar(255) DEFAULT NULL,</span><br><span class="line">  `bus_plate` varchar(255) DEFAULT NULL,</span><br><span class="line">  `bus_state` int(11) DEFAULT NULL,</span><br><span class="line">  `comp_code` varchar(255) DEFAULT NULL,</span><br><span class="line">  `current_runs` int(11) DEFAULT NULL,</span><br><span class="line">  `gps_code` varchar(255) DEFAULT NULL,</span><br><span class="line">  `gps_date` varchar(255) DEFAULT NULL,</span><br><span class="line">  `store_date` varchar(255) DEFAULT NULL,</span><br><span class="line">  `gps_direction` int(11) DEFAULT NULL,</span><br><span class="line">  `gps_mileage` varchar(255) DEFAULT NULL,</span><br><span class="line">  `gps_speed` varchar(255) DEFAULT NULL,</span><br><span class="line">  `plan_runs` int(11) DEFAULT NULL,</span><br><span class="line">  `plan_time` varchar(255) DEFAULT NULL,</span><br><span class="line">  `road_id` varchar(255) DEFAULT NULL,</span><br><span class="line">  `road_name` varchar(255) DEFAULT NULL,</span><br><span class="line">  `road_type` int(11) DEFAULT NULL,</span><br><span class="line">  `site_id` varchar(255) DEFAULT NULL,</span><br><span class="line">  `site_name` varchar(255) DEFAULT NULL,</span><br><span class="line">  `site_no` int(11) DEFAULT NULL,</span><br><span class="line">  `site_state` int(11) DEFAULT NULL,</span><br><span class="line">  `create_time` varchar(255) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=24771706 DEFAULT CHARSET=utf8;</span><br><span class="line"></span><br><span class="line">ALTER TABLE tb_description DEFAULT CHARACTER SET utf8mb4;</span><br><span class="line">set sql_mode=&#x27;&#x27;;</span><br><span class="line"></span><br><span class="line">load data infile &#x27;/var/lib/mysql-files/t_bus_status.csv&#x27; into table t_bus_status fields terminated by &#x27;,&#x27; optionally enclosed by &#x27;&quot;&#x27; ignore 1 rows;</span><br></pre></td></tr></table></figure>
+
+<h3 id="地理位置表"><a href="#地理位置表" class="headerlink" title="地理位置表"></a>地理位置表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table t_geo  select id, gps_code, gps_direction from t_bus_status;</span><br></pre></td></tr></table></figure>
+<p>导出为csv进行处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(SELECT &#x27;id&#x27;, &#x27;gps_code&#x27;, &#x27;gps_direction&#x27;)</span><br><span class="line">UNION </span><br><span class="line">(SELECT id, gps_code, gps_direction</span><br><span class="line">INTO OUTFILE &#x27;/var/lib/mysql/t_geo.csv&#x27;</span><br><span class="line">FIELDS ENCLOSED BY &#x27;&quot;&#x27; </span><br><span class="line">TERMINATED BY &#x27;;&#x27; </span><br><span class="line">ESCAPED BY &#x27;&quot;&#x27; </span><br><span class="line">LINES TERMINATED BY &#x27;\r\n&#x27;</span><br><span class="line">FROM t_bus_status);</span><br></pre></td></tr></table></figure>
+<h4 id="路线表"><a href="#路线表" class="headerlink" title="路线表"></a>路线表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;</span><br></pre></td></tr></table></figure>
+
+<h2 id="展示在Grafana"><a href="#展示在Grafana" class="headerlink" title="展示在Grafana"></a>展示在Grafana</h2><h3 id="线路的车次"><a href="#线路的车次" class="headerlink" title="线路的车次"></a>线路的车次</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  $__timeGroupAlias(gps_date,$__interval),</span><br><span class="line">  road_id AS metric,</span><br><span class="line">  count(site_id) AS &quot;site_id&quot;</span><br><span class="line">FROM t_bus_status</span><br><span class="line">WHERE</span><br><span class="line">  $__timeFilter(gps_date)</span><br><span class="line">GROUP BY 1,2</span><br><span class="line">ORDER BY $__timeGroup(gps_date,$__interval)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h3 id="MySQL登录"><a href="#MySQL登录" class="headerlink" title="MySQL登录"></a>MySQL登录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h3 id="MySQL导入导出"><a href="#MySQL导入导出" class="headerlink" title="MySQL导入导出"></a>MySQL导入导出</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure>
+<p>添加配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">secure_file_priv=&#x27;&#x27;</span><br></pre></td></tr></table></figure>
+<p>重启MySQL</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysql</span><br></pre></td></tr></table></figure>
+<p>查看文件导出位置（默认为/var/lib/mysql/）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;%datadir%&#x27;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://missingstuffedbun.github.io/2022/03/20/SQL%20for%20bus/" data-id="cl128f6nr000p4guu14wu0m5a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Github Page via Hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/03/20/Github%20Page%20via%20Hexo/" class="article-date">
@@ -124,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/20/Github%20Page%20via%20Hexo/" data-id="cl0pj9iri00019wuu1u6w6per" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/20/Github%20Page%20via%20Hexo/" data-id="cl128f6n700044guu2dz8bkep" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
@@ -206,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/20/DETR%20Train%20from%20Scratch/" data-id="cl0pj9irc00009wuugz54bzoj" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/20/DETR%20Train%20from%20Scratch/" data-id="cl128f6mw00004guu9oia8beq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DETR/" rel="tag">DETR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a></li></ul>
@@ -256,71 +317,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/09/Jupyter-and-MySQL-on-Alibaba-Cloud/" data-id="cl0pj9iro00049wuue2k1d8ze" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/09/Jupyter-and-MySQL-on-Alibaba-Cloud/" data-id="cl128f6nt000q4guu01icatfd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jupyter/" rel="tag">Jupyter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SQL for bus" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/03/09/SQL%20for%20bus/" class="article-date">
-  <time datetime="2022-03-09T08:27:00.834Z" itemprop="datePublished">2022-03-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%95%99%E5%AD%A6/">教学</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/09/SQL%20for%20bus/">公交数据</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p>数据库：bus<br>数据表：t_bus_status</p>
-<h2 id="建库建表"><a href="#建库建表" class="headerlink" title="建库建表"></a>建库建表</h2><p>导入csv数据</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">create database if not exists bus;</span><br><span class="line">use bus;</span><br><span class="line">DROP TABLE IF EXISTS `t_bus_status`;</span><br><span class="line">CREATE TABLE `t_bus_status` (</span><br><span class="line">  `id` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">  `bus_id` varchar(255) DEFAULT NULL,</span><br><span class="line">  `bus_plate` varchar(255) DEFAULT NULL,</span><br><span class="line">  `bus_state` int(11) DEFAULT NULL,</span><br><span class="line">  `comp_code` varchar(255) DEFAULT NULL,</span><br><span class="line">  `current_runs` int(11) DEFAULT NULL,</span><br><span class="line">  `gps_code` varchar(255) DEFAULT NULL,</span><br><span class="line">  `gps_date` varchar(255) DEFAULT NULL,</span><br><span class="line">  `store_date` varchar(255) DEFAULT NULL,</span><br><span class="line">  `gps_direction` int(11) DEFAULT NULL,</span><br><span class="line">  `gps_mileage` varchar(255) DEFAULT NULL,</span><br><span class="line">  `gps_speed` varchar(255) DEFAULT NULL,</span><br><span class="line">  `plan_runs` int(11) DEFAULT NULL,</span><br><span class="line">  `plan_time` varchar(255) DEFAULT NULL,</span><br><span class="line">  `road_id` varchar(255) DEFAULT NULL,</span><br><span class="line">  `road_name` varchar(255) DEFAULT NULL,</span><br><span class="line">  `road_type` int(11) DEFAULT NULL,</span><br><span class="line">  `site_id` varchar(255) DEFAULT NULL,</span><br><span class="line">  `site_name` varchar(255) DEFAULT NULL,</span><br><span class="line">  `site_no` int(11) DEFAULT NULL,</span><br><span class="line">  `site_state` int(11) DEFAULT NULL,</span><br><span class="line">  `create_time` varchar(255) DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=24771706 DEFAULT CHARSET=utf8;</span><br><span class="line"></span><br><span class="line">ALTER TABLE tb_description DEFAULT CHARACTER SET utf8mb4;</span><br><span class="line">set sql_mode=&#x27;&#x27;;</span><br><span class="line"></span><br><span class="line">load data infile &#x27;/var/lib/mysql-files/t_bus_status.csv&#x27; into table t_bus_status fields terminated by &#x27;,&#x27; optionally enclosed by &#x27;&quot;&#x27; ignore 1 rows;</span><br></pre></td></tr></table></figure>
-
-<h3 id="地理位置表"><a href="#地理位置表" class="headerlink" title="地理位置表"></a>地理位置表</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table t_geo  select id, gps_code, gps_direction from t_bus_status;</span><br></pre></td></tr></table></figure>
-<p>导出为csv进行处理</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(SELECT &#x27;id&#x27;, &#x27;gps_code&#x27;, &#x27;gps_direction&#x27;)</span><br><span class="line">UNION </span><br><span class="line">(SELECT id, gps_code, gps_direction</span><br><span class="line">INTO OUTFILE &#x27;/var/lib/mysql/t_geo.csv&#x27;</span><br><span class="line">FIELDS ENCLOSED BY &#x27;&quot;&#x27; </span><br><span class="line">TERMINATED BY &#x27;;&#x27; </span><br><span class="line">ESCAPED BY &#x27;&quot;&#x27; </span><br><span class="line">LINES TERMINATED BY &#x27;\r\n&#x27;</span><br><span class="line">FROM t_bus_status);</span><br></pre></td></tr></table></figure>
-<h4 id="路线表"><a href="#路线表" class="headerlink" title="路线表"></a>路线表</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create table t_road select distinct road_id, road_name, site_id, site_no, site_name from t_bus_status;</span><br></pre></td></tr></table></figure>
-
-<h2 id="展示在Grafana"><a href="#展示在Grafana" class="headerlink" title="展示在Grafana"></a>展示在Grafana</h2><h3 id="线路的车次"><a href="#线路的车次" class="headerlink" title="线路的车次"></a>线路的车次</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">  $__timeGroupAlias(gps_date,$__interval),</span><br><span class="line">  road_id AS metric,</span><br><span class="line">  count(site_id) AS &quot;site_id&quot;</span><br><span class="line">FROM t_bus_status</span><br><span class="line">WHERE</span><br><span class="line">  $__timeFilter(gps_date)</span><br><span class="line">GROUP BY 1,2</span><br><span class="line">ORDER BY $__timeGroup(gps_date,$__interval)</span><br></pre></td></tr></table></figure>
-
-<h2 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h2><h3 id="MySQL登录"><a href="#MySQL登录" class="headerlink" title="MySQL登录"></a>MySQL登录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
-<h3 id="MySQL导入导出"><a href="#MySQL导入导出" class="headerlink" title="MySQL导入导出"></a>MySQL导入导出</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mysql/mysql.conf.d/mysqld.cnf</span><br></pre></td></tr></table></figure>
-<p>添加配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">secure_file_priv=&#x27;&#x27;</span><br></pre></td></tr></table></figure>
-<p>重启MySQL</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart mysql</span><br></pre></td></tr></table></figure>
-<p>查看文件导出位置（默认为/var/lib/mysql/）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &#x27;%datadir%&#x27;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/09/SQL%20for%20bus/" data-id="cl0pj9is4000y9wuugw5k7yib" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
 
     </footer>
   </div>
@@ -371,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" data-id="cl0pj9irq00059wuubyqgab05" class="article-share-link">Share</a>
+      <a data-url="http://missingstuffedbun.github.io/2022/03/08/Grafana%20on%20Alibaba%20Cloud/" data-id="cl128f6n200014guu3kbsd4f5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grafana/" rel="tag">Grafana</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li></ul>
@@ -435,6 +435,10 @@
       <ul>
         
           <li>
+            <a href="/2022/03/20/SQL%20for%20bus/">公交数据</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/20/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
           </li>
         
@@ -444,10 +448,6 @@
         
           <li>
             <a href="/2022/03/09/Jupyter-and-MySQL-on-Alibaba-Cloud/">Jupyter and MySQL on Alibaba Cloud</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/09/SQL%20for%20bus/">公交数据</a>
           </li>
         
           <li>
