@@ -64,6 +64,160 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Github Page via Hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/20/Github%20Page%20via%20Hexo/" class="article-date">
+  <time datetime="2022-03-19T17:00:54.203Z" itemprop="datePublished">2022-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Productive/">Productive</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/20/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>NodeJS</p>
+<h2 id="重要步骤"><a href="#重要步骤" class="headerlink" title="重要步骤"></a>重要步骤</h2><p>npm命令安装Hexo</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br></pre></td></tr></table></figure>
+<p>初始化博客（创建blog文件夹）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog </span><br></pre></td></tr></table></figure>
+<p>生成文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+<p>启动服务（localhost:4000）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>配置站点信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi _config.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">git@github.com:missingstuffedbun/missingstuffedbun.github.io.git</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://missingstuffedbun.github.io/</span></span><br></pre></td></tr></table></figure>
+<p>部署到站点（Github Page）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><h3 id="ERROR-Deployer-not-found-git"><a href="#ERROR-Deployer-not-found-git" class="headerlink" title="ERROR Deployer not found: git"></a>ERROR Deployer not found: git</h3><p>安装hexo-deployer-git</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<h3 id="博文添加图片"><a href="#博文添加图片" class="headerlink" title="博文添加图片"></a>博文添加图片</h3><p>安装插件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-marked</span><br></pre></td></tr></table></figure>
+<p>配置站点</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="hexo报错"><a href="#hexo报错" class="headerlink" title="hexo报错"></a>hexo报错</h3><p>错误信息</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo : 无法加载文件 C:\Users\missingstuffedbun\AppData\Roaming\npm\hexo.ps1，因为在此系统上禁止运行脚本。有关详细信息，请参阅 https:/go.microsoft.com/f</span><br><span class="line">wlink/?LinkID=135170 中的 about<span class="emphasis">_Execution_</span>Policies。</span><br></pre></td></tr></table></figure>
+<p>解决方案：设置 -&gt; 允许本地PowerShell脚本在不签名的情况下运行</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106166402">Windows下使用Hexo搭建博客
+</a> </p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/764974">hexo d命令报错</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43874301/article/details/111102493">hexo 无法加载文件</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://missingstuffedbun.github.io/2022/03/20/Github%20Page%20via%20Hexo/" data-id="cl0pj9iri00019wuu1u6w6per" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-DETR Train from Scratch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/03/20/DETR%20Train%20from%20Scratch/" class="article-date">
+  <time datetime="2022-03-19T17:00:54.167Z" itemprop="datePublished">2022-03-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Research/">Research</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/20/DETR%20Train%20from%20Scratch/">DETR Train from Scratch</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Example can be found in [<span class="string">Github</span>](<span class="link">https://github.com/missingstuffedbun/detr/blob/3c3541d4a30872f9eed171575f46c872ffabbfaa/detrwithcustomized.ipynb</span>).</span><br></pre></td></tr></table></figure>
+<h2 id="Convert-Custom-Dataset-to-Coco-Format"><a href="#Convert-Custom-Dataset-to-Coco-Format" class="headerlink" title="Convert Custom Dataset to Coco Format"></a>Convert Custom Dataset to Coco Format</h2><h3 id="Reorganize-Dirs-and-Files"><a href="#Reorganize-Dirs-and-Files" class="headerlink" title="Reorganize Dirs and Files"></a>Reorganize Dirs and Files</h3><p>File hierarchy</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--Dataset</span><br><span class="line">----train</span><br><span class="line">------image.jpg</span><br><span class="line">----test</span><br><span class="line">------image.jpg</span><br><span class="line">----val</span><br><span class="line">------image.jpg</span><br><span class="line">----custom_train.json</span><br><span class="line">----custom_test.json</span><br><span class="line">----custom_val.json</span><br></pre></td></tr></table></figure>
+<h3 id="Create-Annotation"><a href="#Create-Annotation" class="headerlink" title="Create Annotation"></a>Create Annotation</h3><p>Least required info</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;images&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      &#x27;file_name&#x27;<span class="punctuation">:</span>  file_name<span class="punctuation">,</span></span><br><span class="line">      &#x27;height&#x27;<span class="punctuation">:</span>  height<span class="punctuation">,</span></span><br><span class="line">      &#x27;width&#x27;<span class="punctuation">:</span>  width<span class="punctuation">,</span></span><br><span class="line">      &#x27;id&#x27;<span class="punctuation">:</span> image_id</span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;annotations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span>  id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;image_id&quot;</span><span class="punctuation">:</span> image_id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;category_id&quot;</span><span class="punctuation">:</span> category_id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;segmentation&quot;</span><span class="punctuation">:</span> segmentation<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;area&quot;</span><span class="punctuation">:</span> area<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;bbox&quot;</span><span class="punctuation">:</span> bbox<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;iscrowd&quot;</span><span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;categories&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> name</span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h4><ol>
+<li><strong>image_id</strong> is the unique identical of image file, whereas <strong>id</strong> represents one detected object.</li>
+<li>The calculation of <strong>ploy</strong>, <strong>segmentation</strong> and <strong>area</strong>. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;bbox&#x27;</span>] = df[[<span class="string">&#x27;xmin&#x27;</span>,<span class="string">&#x27;ymin&#x27;</span>,<span class="string">&#x27;bbox_width&#x27;</span>,<span class="string">&#x27;bbox_height&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly1&#x27;</span>] = df[[<span class="string">&#x27;xmin&#x27;</span>,<span class="string">&#x27;ymin&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly2&#x27;</span>] = df[[<span class="string">&#x27;xmax&#x27;</span>,<span class="string">&#x27;ymin&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly3&#x27;</span>] = df[[<span class="string">&#x27;xmax&#x27;</span>,<span class="string">&#x27;ymax&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly4&#x27;</span>] = df[[<span class="string">&#x27;xmin&#x27;</span>,<span class="string">&#x27;ymax&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly&#x27;</span>] = df[[<span class="string">&#x27;poly1&#x27;</span>,<span class="string">&#x27;poly2&#x27;</span>,<span class="string">&#x27;poly3&#x27;</span>,<span class="string">&#x27;poly4&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;segmentation&#x27;</span>] = df[<span class="string">&#x27;poly&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">list</span>(x))</span><br><span class="line">df[<span class="string">&#x27;area&#x27;</span>] = df[<span class="string">&#x27;bbox_width&#x27;</span>] * df[<span class="string">&#x27;bbox_height&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+<li><strong>segmentation</strong> can be described as a list of <strong>poly</strong>. </li>
+</ol>
+<h2 id="Load-Dataset-and-Train"><a href="#Load-Dataset-and-Train" class="headerlink" title="Load Dataset and Train"></a>Load Dataset and Train</h2><p>In <strong>detr/dataset</strong>, build class constructor for custom datasets by revising aa copy of <strong>coco.py</strong>. </p>
+<h4 id="detr-datasets-customized-py"><a href="#detr-datasets-customized-py" class="headerlink" title="detr/datasets/customized.py"></a>detr/datasets/customized.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomizedDetection</span>(torchvision.datasets.CocoDetection):</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">image_set, args</span>):</span><br><span class="line">    ...</span><br><span class="line">    PATHS = &#123;</span><br><span class="line">        <span class="string">&quot;train&quot;</span>: (root / <span class="string">&quot;train&quot;</span>, root / <span class="string">f&#x27;custom_train.json&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;val&quot;</span>: (root / <span class="string">&quot;val&quot;</span>, root / <span class="string">f&#x27;custom_val.json&#x27;</span>),</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>Update <strong><strong>init</strong>.py</strong> to call customized dataset builder. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .customized <span class="keyword">import</span> build <span class="keyword">as</span> build_customized</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build_dataset</span>(<span class="params">image_set, args</span>):</span><br><span class="line">    <span class="keyword">if</span> args.dataset_file == <span class="string">&#x27;customized&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> build_customized(image_set, args)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>Update <strong>detr/main.py</strong> to align with customized data builder. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dataset parameters</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--data_path&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br></pre></td></tr></table></figure>
+<p>Reduce number of queries to cut down the time. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;--num_queries&#x27;</span>, default=<span class="number">10</span>, <span class="built_in">type</span>=<span class="built_in">int</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&quot;Number of detected object&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>Update <strong>detr/models/detr.py</strong> to specify the number of classes. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">args</span>):</span><br><span class="line">    <span class="keyword">if</span> args.dataset_file == <span class="string">&quot;customized&quot;</span>:</span><br><span class="line">        num_classes = customized_num_classes</span><br></pre></td></tr></table></figure>
+<p>Train detr from scratch. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detr/main.py --dataset_file customized --data_path $DATAPATH --epochs $EPOCHS --output_dir output/$VER --resume output/$LATEST/checkpoint.pth</span><br></pre></td></tr></table></figure>
+<p>Train detr with pretrained model might leads to mismatch due to the inconsistency of number of queries.<br>Remove weights that related to num_class and num_queries in <strong>detr/main.py</strong>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Before load checkpoint[&#x27;model&#x27;], coco checkpoints only</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.resume.endswith(<span class="string">&#x27;checkpoint.pth&#x27;</span>):</span><br><span class="line">        <span class="keyword">del</span> checkpoint[<span class="string">&#x27;model&#x27;</span>][<span class="string">&#x27;class_embed.weight&#x27;</span>]</span><br><span class="line">        <span class="keyword">del</span> checkpoint[<span class="string">&#x27;model&#x27;</span>][<span class="string">&#x27;class_embed.bias&#x27;</span>]</span><br><span class="line">        <span class="keyword">del</span> checkpoint[<span class="string">&#x27;model&#x27;</span>][<span class="string">&#x27;query_embed.weight&#x27;</span>]</span><br><span class="line"><span class="comment"># Ignore missing weights</span></span><br><span class="line">model_without_ddp.load_state_dict(checkpoint[<span class="string">&#x27;model&#x27;</span>], strict=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p>Use <strong>detr/test.py</strong> to visualize the results. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detr/test.py --data_path $DATAPATH --resume output/$LATEST/checkpoint.pth</span><br></pre></td></tr></table></figure>
+
+<h2 id="On-Premise-Deployment"><a href="#On-Premise-Deployment" class="headerlink" title="On-Premise Deployment"></a>On-Premise Deployment</h2><p>Once tested in colab, deploy the code to on-premise workstation.  </p>
+<h3 id="Code-Preparation"><a href="#Code-Preparation" class="headerlink" title="Code Preparation"></a>Code Preparation</h3><p>Pull it down on the deployment host.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:missingstuffedbun/detr.git</span><br></pre></td></tr></table></figure>
+<h3 id="Docker-Env"><a href="#Docker-Env" class="headerlink" title="Docker Env"></a>Docker Env</h3><p>Build docker for DETR with jupyter. Please note that pip mirror site should be set properly.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> yihui8776/detr:v0.<span class="number">2</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> author <span class="string">&quot;missingstuffedbun@hotmail.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install jupyterlab</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> jupyter lab --generate-config</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> python -c <span class="string">&quot;from notebook.auth import passwd; print(\&quot;c.NotebookApp.password = u&#x27;\&quot; +  passwd(&#x27;123456&#x27;) + \&quot;&#x27;\&quot;)&quot;</span> &gt;&gt; ~/.jupyter/jupyter_lab_config.py</span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">9005</span></span><br><span class="line"><span class="keyword">ENV</span> NOTEBOOK_DIR=/workspace</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> jupyter lab --ip=<span class="string">&#x27;0.0.0.0&#x27;</span> --allow-root --no-browser --port=<span class="variable">$&#123;PORT&#125;</span> --allow-root --notebook-dir=<span class="variable">$&#123;NOTEBOOK_DIR&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>Due to the pycocotool installation issue, using <strong>yihui8776/detr:v0.2</strong> instead of <strong>facebook/detr</strong>. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build . -t missingstuffedbun/detr:0.1</span><br></pre></td></tr></table></figure>
+<p>Run docker. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker stop detr &amp;&amp; docker rm detr</span><br><span class="line"></span><br><span class="line">docker run -d -p 9006:9005 --gpus all \</span><br><span class="line">-v /raid/9006/:/workspace/mount \</span><br><span class="line">-v /home/cs/.ssh:/root/.ssh \</span><br><span class="line">--name detr missingstuffedbun/detr:0.2</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=RkhXoj_Vvr4&t=1330s">Youtube</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://missingstuffedbun.github.io/2022/03/20/DETR%20Train%20from%20Scratch/" data-id="cl0pj9irc00009wuugz54bzoj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DETR/" rel="tag">DETR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Jupyter-and-MySQL-on-Alibaba-Cloud" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/03/09/Jupyter-and-MySQL-on-Alibaba-Cloud/" class="article-date">
@@ -106,160 +260,6 @@
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jupyter/" rel="tag">Jupyter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">阿里云</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Github Page via Hexo" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/03/09/Github%20Page%20via%20Hexo/" class="article-date">
-  <time datetime="2022-03-09T08:27:00.850Z" itemprop="datePublished">2022-03-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Productive/">Productive</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/09/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h2><p>NodeJS</p>
-<h2 id="重要步骤"><a href="#重要步骤" class="headerlink" title="重要步骤"></a>重要步骤</h2><p>npm命令安装Hexo</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli </span><br></pre></td></tr></table></figure>
-<p>初始化博客（创建blog文件夹）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog </span><br></pre></td></tr></table></figure>
-<p>生成文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
-<p>启动服务（localhost:4000）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>配置站点信息</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi _config.yml</span><br></pre></td></tr></table></figure>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">    <span class="attr">repo:</span> <span class="string">git@github.com:missingstuffedbun/missingstuffedbun.github.io.git</span></span><br><span class="line">    <span class="attr">branch:</span> <span class="string">main</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://missingstuffedbun.github.io/</span></span><br></pre></td></tr></table></figure>
-<p>部署到站点（Github Page）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><h3 id="ERROR-Deployer-not-found-git"><a href="#ERROR-Deployer-not-found-git" class="headerlink" title="ERROR Deployer not found: git"></a>ERROR Deployer not found: git</h3><p>安装hexo-deployer-git</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-
-<h3 id="博文添加图片"><a href="#博文添加图片" class="headerlink" title="博文添加图片"></a>博文添加图片</h3><p>安装插件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-renderer-marked</span><br></pre></td></tr></table></figure>
-<p>配置站点</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/106166402">Windows下使用Hexo搭建博客
-</a> </p>
-<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/764974">hexo d命令报错</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/09/Github%20Page%20via%20Hexo/" data-id="cl0pj9iri00019wuu1u6w6per" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/" rel="tag">Github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-DETR Train from Scratch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2022/03/09/DETR%20Train%20from%20Scratch/" class="article-date">
-  <time datetime="2022-03-09T08:27:00.834Z" itemprop="datePublished">2022-03-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Research/">Research</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/09/DETR%20Train%20from%20Scratch/">DETR Train from Scratch</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>Example can be found in <a target="_blank" rel="noopener" href="https://github.com/missingstuffedbun/detr/blob/3c3541d4a30872f9eed171575f46c872ffabbfaa/detrwithcustomized.ipynb">Github</a>.</p>
-</blockquote>
-<h2 id="Convert-Custom-Dataset-to-Coco-Format"><a href="#Convert-Custom-Dataset-to-Coco-Format" class="headerlink" title="Convert Custom Dataset to Coco Format"></a>Convert Custom Dataset to Coco Format</h2><h3 id="Reorganize-Dirs-and-Files"><a href="#Reorganize-Dirs-and-Files" class="headerlink" title="Reorganize Dirs and Files"></a>Reorganize Dirs and Files</h3><p>File hierarchy</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--Dataset</span><br><span class="line">----train</span><br><span class="line">------image.jpg</span><br><span class="line">----test</span><br><span class="line">------image.jpg</span><br><span class="line">----val</span><br><span class="line">------image.jpg</span><br><span class="line">----custom_train.json</span><br><span class="line">----custom_test.json</span><br><span class="line">----custom_val.json</span><br></pre></td></tr></table></figure>
-<h3 id="Create-Annotation"><a href="#Create-Annotation" class="headerlink" title="Create Annotation"></a>Create Annotation</h3><p>Least required info</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;images&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      &#x27;file_name&#x27;<span class="punctuation">:</span>  file_name<span class="punctuation">,</span></span><br><span class="line">      &#x27;height&#x27;<span class="punctuation">:</span>  height<span class="punctuation">,</span></span><br><span class="line">      &#x27;width&#x27;<span class="punctuation">:</span>  width<span class="punctuation">,</span></span><br><span class="line">      &#x27;id&#x27;<span class="punctuation">:</span> image_id</span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;annotations&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span>  id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;image_id&quot;</span><span class="punctuation">:</span> image_id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;category_id&quot;</span><span class="punctuation">:</span> category_id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;segmentation&quot;</span><span class="punctuation">:</span> segmentation<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;area&quot;</span><span class="punctuation">:</span> area<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;bbox&quot;</span><span class="punctuation">:</span> bbox<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;iscrowd&quot;</span><span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;categories&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> id<span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> name</span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h4><ol>
-<li><strong>image_id</strong> is the unique identical of image file, whereas <strong>id</strong> represents one detected object.</li>
-<li>The calculation of <strong>ploy</strong>, <strong>segmentation</strong> and <strong>area</strong>. <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df[<span class="string">&#x27;bbox&#x27;</span>] = df[[<span class="string">&#x27;xmin&#x27;</span>,<span class="string">&#x27;ymin&#x27;</span>,<span class="string">&#x27;bbox_width&#x27;</span>,<span class="string">&#x27;bbox_height&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly1&#x27;</span>] = df[[<span class="string">&#x27;xmin&#x27;</span>,<span class="string">&#x27;ymin&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly2&#x27;</span>] = df[[<span class="string">&#x27;xmax&#x27;</span>,<span class="string">&#x27;ymin&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly3&#x27;</span>] = df[[<span class="string">&#x27;xmax&#x27;</span>,<span class="string">&#x27;ymax&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly4&#x27;</span>] = df[[<span class="string">&#x27;xmin&#x27;</span>,<span class="string">&#x27;ymax&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;poly&#x27;</span>] = df[[<span class="string">&#x27;poly1&#x27;</span>,<span class="string">&#x27;poly2&#x27;</span>,<span class="string">&#x27;poly3&#x27;</span>,<span class="string">&#x27;poly4&#x27;</span>]].to_numpy().tolist()</span><br><span class="line">df[<span class="string">&#x27;segmentation&#x27;</span>] = df[<span class="string">&#x27;poly&#x27;</span>].apply(<span class="keyword">lambda</span> x: <span class="built_in">list</span>(x))</span><br><span class="line">df[<span class="string">&#x27;area&#x27;</span>] = df[<span class="string">&#x27;bbox_width&#x27;</span>] * df[<span class="string">&#x27;bbox_height&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
-<li><strong>segmentation</strong> can be described as a list of <strong>poly</strong>. </li>
-</ol>
-<h2 id="Load-Dataset-and-Train"><a href="#Load-Dataset-and-Train" class="headerlink" title="Load Dataset and Train"></a>Load Dataset and Train</h2><p>In <strong>detr/dataset</strong>, build class constructor for custom datasets by revising aa copy of <strong>coco.py</strong>. </p>
-<h4 id="detr-datasets-customized-py"><a href="#detr-datasets-customized-py" class="headerlink" title="detr/datasets/customized.py"></a>detr/datasets/customized.py</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CustomizedDetection</span>(torchvision.datasets.CocoDetection):</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">image_set, args</span>):</span><br><span class="line">    ...</span><br><span class="line">    PATHS = &#123;</span><br><span class="line">        <span class="string">&quot;train&quot;</span>: (root / <span class="string">&quot;train&quot;</span>, root / <span class="string">f&#x27;custom_train.json&#x27;</span>),</span><br><span class="line">        <span class="string">&quot;val&quot;</span>: (root / <span class="string">&quot;val&quot;</span>, root / <span class="string">f&#x27;custom_val.json&#x27;</span>),</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>Update <strong><strong>init</strong>.py</strong> to call customized dataset builder. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .customized <span class="keyword">import</span> build <span class="keyword">as</span> build_customized</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">build_dataset</span>(<span class="params">image_set, args</span>):</span><br><span class="line">    <span class="keyword">if</span> args.dataset_file == <span class="string">&#x27;customized&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> build_customized(image_set, args)</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
-<p>Update <strong>detr/main.py</strong> to align with customized data builder. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># dataset parameters</span></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--data_path&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">str</span>)</span><br></pre></td></tr></table></figure>
-<p>Reduce number of queries to cut down the time. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;--num_queries&#x27;</span>, default=<span class="number">10</span>, <span class="built_in">type</span>=<span class="built_in">int</span>,</span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&quot;Number of detected object&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>Update <strong>detr/models/detr.py</strong> to specify the number of classes. </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">args</span>):</span><br><span class="line">    <span class="keyword">if</span> args.dataset_file == <span class="string">&quot;customized&quot;</span>:</span><br><span class="line">        num_classes = customized_num_classes</span><br></pre></td></tr></table></figure>
-<p>Train detr from scratch. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detr/main.py --dataset_file customized --data_path $DATAPATH --epochs $EPOCHS --output_dir output/$VER --resume output/$LATEST/checkpoint.pth</span><br></pre></td></tr></table></figure>
-<p>Train detr with pretrained model might leads to mismatch due to the inconsistency of number of queries.<br>Remove weights that related to num_class and num_queries in <strong>detr/main.py</strong>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Before load checkpoint[&#x27;model&#x27;], coco checkpoints only</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> args.resume.endswith(<span class="string">&#x27;checkpoint.pth&#x27;</span>):</span><br><span class="line">        <span class="keyword">del</span> checkpoint[<span class="string">&#x27;model&#x27;</span>][<span class="string">&#x27;class_embed.weight&#x27;</span>]</span><br><span class="line">        <span class="keyword">del</span> checkpoint[<span class="string">&#x27;model&#x27;</span>][<span class="string">&#x27;class_embed.bias&#x27;</span>]</span><br><span class="line">        <span class="keyword">del</span> checkpoint[<span class="string">&#x27;model&#x27;</span>][<span class="string">&#x27;query_embed.weight&#x27;</span>]</span><br><span class="line"><span class="comment"># Ignore missing weights</span></span><br><span class="line">model_without_ddp.load_state_dict(checkpoint[<span class="string">&#x27;model&#x27;</span>], strict=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<p>Use <strong>detr/test.py</strong> to visualize the results. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python detr/test.py --data_path $DATAPATH --resume output/$LATEST/checkpoint.pth</span><br></pre></td></tr></table></figure>
-
-<h2 id="On-Premise-Deployment"><a href="#On-Premise-Deployment" class="headerlink" title="On-Premise Deployment"></a>On-Premise Deployment</h2><p>Once tested in colab, deploy the code to on-premise workstation.  </p>
-<h3 id="Code-Preparation"><a href="#Code-Preparation" class="headerlink" title="Code Preparation"></a>Code Preparation</h3><p>Pull it down on the deployment host.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:missingstuffedbun/detr.git</span><br></pre></td></tr></table></figure>
-<h3 id="Docker-Env"><a href="#Docker-Env" class="headerlink" title="Docker Env"></a>Docker Env</h3><p>Build docker for DETR with jupyter. Please note that pip mirror site should be set properly.</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> yihui8776/detr:v0.<span class="number">2</span></span><br><span class="line"><span class="keyword">MAINTAINER</span> author <span class="string">&quot;missingstuffedbun@hotmail.com&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pip install jupyterlab</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> jupyter lab --generate-config</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> python -c <span class="string">&quot;from notebook.auth import passwd; print(\&quot;c.NotebookApp.password = u&#x27;\&quot; +  passwd(&#x27;123456&#x27;) + \&quot;&#x27;\&quot;)&quot;</span> &gt;&gt; ~/.jupyter/jupyter_lab_config.py</span></span><br><span class="line"><span class="keyword">ENV</span> PORT=<span class="number">9005</span></span><br><span class="line"><span class="keyword">ENV</span> NOTEBOOK_DIR=/workspace</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> jupyter lab --ip=<span class="string">&#x27;0.0.0.0&#x27;</span> --allow-root --no-browser --port=<span class="variable">$&#123;PORT&#125;</span> --allow-root --notebook-dir=<span class="variable">$&#123;NOTEBOOK_DIR&#125;</span></span></span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Due to the pycocotool installation issue, using <strong>yihui8776/detr:v0.2</strong> instead of <strong>facebook/detr</strong>. </p>
-</blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build . -t missingstuffedbun/detr:0.1</span><br></pre></td></tr></table></figure>
-<p>Run docker. </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker stop detr &amp;&amp; docker rm detr</span><br><span class="line"></span><br><span class="line">docker run -d -p 9006:9005 \</span><br><span class="line">-v /home/cs/zww/dataset:/workspace/dataset:ro \</span><br><span class="line">-v /home/cs/zww/detr:/workspace/detr \</span><br><span class="line">-v /home/cs/.ssh:/root/.ssh \</span><br><span class="line">--name detr missingstuffedbun/detr:0.1</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=RkhXoj_Vvr4&t=1330s">Youtube</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://missingstuffedbun.github.io/2022/03/09/DETR%20Train%20from%20Scratch/" data-id="cl0pj9irc00009wuugz54bzoj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DETR/" rel="tag">DETR</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Transformer/" rel="tag">Transformer</a></li></ul>
 
     </footer>
   </div>
@@ -435,15 +435,15 @@
       <ul>
         
           <li>
+            <a href="/2022/03/20/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/20/DETR%20Train%20from%20Scratch/">DETR Train from Scratch</a>
+          </li>
+        
+          <li>
             <a href="/2022/03/09/Jupyter-and-MySQL-on-Alibaba-Cloud/">Jupyter and MySQL on Alibaba Cloud</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/09/Github%20Page%20via%20Hexo/">通过Github Page和Hexo搭建个人博客</a>
-          </li>
-        
-          <li>
-            <a href="/2022/03/09/DETR%20Train%20from%20Scratch/">DETR Train from Scratch</a>
           </li>
         
           <li>
